@@ -1,0 +1,329 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities"; 
+
+.boxes{
+  display: flex;
+  margin-top: 50px;
+  
+}
+.one{
+
+  border-right: 100px ;
+}
+.two{
+
+  
+  margin-top: 50px;
+}
+.redx{
+  position: relative;
+}
+
+.todolist{
+  height: 420px;
+  background-color: white;
+  
+}
+
+.taskItem{
+  color: red;
+  text-decoration: line-through;
+}
+
+/* input[type=checkbox] {
+	background-color: #ff1212;
+	border-color: #ff1212;
+	color: #fff;
+}
+
+input[type=checkbox]{
+	text-decoration: line-through;
+	color: #ffffff;
+} */
+input[type=checkbox] {
+  position: relative;
+  cursor: pointer;
+}
+
+input[type=checkbox]:before {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  top: 0;
+  left: 0;
+  border: 2px solid #000000;
+  border-radius: 3px;
+  background-color: white;
+}
+input[type=checkbox]:checked:after {
+  content: "";
+  display: block;
+  width: 5px;
+  height: 10px;
+  border: solid rgb(255, 0, 0);
+  border-width: 0 2px 2px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+  position: absolute;
+  top: 2px;
+  left: 6px;
+}
+
+
+.addItem{
+  border: black solid 1px;
+}
+.c{
+  margin-top: 10px;
+  padding-top: 1px;
+}
+#header{
+  background: linear-gradient(to top, #09203f 0%, #537895 100%);
+  
+  background-blend-mode: multiply,multiply;
+  position: sticky;
+  height: 90px;
+  margin-bottom: 50px;
+
+}
+
+.redx:after {
+
+  
+ height: 10px;
+  margin-bottom: 50px;
+ 
+  /* content: "\274c"; use the hex value here... */
+  content: "\274c";
+  line-height: 62px;
+  font-size: 70px;
+  text-align: center;
+  color: #FFF;
+
+ 
+  /* line-height: 0px; */
+  /* text-align: center; */
+}
+
+.todoapp{
+  height: 100px;
+  
+}
+
+.fire{
+  position: relative;
+}
+
+.fire:after{
+  content:"\1f525";
+  font-size:30px;
+}
+
+
+
+html {
+  height: 100%;
+}
+body {
+  /* background-image: linear-gradient(to right top, #04204a, #4a4f74, #8585a0, #c1c0ce, #ffffff); */
+  background-image: linear-gradient(to top, #c4c5c7 0%, #dcdddf 52%, #ebebeb 100%);
+  height: 100%;
+  margin: 0;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+.formheader{
+  display: flex;
+ 
+}
+
+#header{
+  margin-top: 0px;
+  padding: 0;
+}
+
+
+.landingpage{
+  margin-top: 90px;
+
+}
+
+.browser-mockup:before {
+  display: block;
+  position: absolute;
+  content: "";
+  top: -1.25em;
+  left: 1em;
+  width: 0.5em;
+  height: 0.5em;
+  border-radius: 50%;
+  background-color: #f44;
+  box-shadow: 0 0 0 2px #f44, 1.5em 0 0 2px #9b3, 3em 0 0 2px #fb5;
+}
+
+.landingimg{
+  margin: auto;
+  
+}
+
+.landing{
+  display: block;
+  justify-content: center;
+  align-items: center;
+}
+
+.seinfeld{
+  text-decoration: underline;
+}
+
+#navAction{
+  background-color: #FFD700;
+  margin-left: 20px;
+}
+
+.popup {
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.4);
+  }
+  
+  .popup-inner {
+  background-color: white;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  padding: 15px;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+  width: 25%;
+  }
+  
+  .popup-inner h2 {
+  margin-top: 0;
+  }
+  
+  .popup-inner label {
+  display: block;
+  margin-bottom: 5px;
+  }
+  
+  .popup-inner input {
+  width: 100%;
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  margin-bottom: 12px;
+  }
+  
+  .popup-inner button[type="submit"],
+  .popup-inner button[type="button"] {
+  background-color: #ef1c0d;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin-right: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  }
+
+  .popup-inner button[type="close"]{
+  background-color: #707070;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin-right: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  }
+  
+  .popup-inner button[type="submit"]:hover,
+  .popup-inner button[type="button"]:hover {
+  background-color: #45a049;
+  }
+  
+  .popup-inner button[type="submit"] {
+  margin-top: 10px;
+  }
+  
+  .popup-inner button[type="button"] {
+  margin-top: 5px;
+  background-color: #f44336;
+  }
+  
+  .popup-inner button[type="button"]:hover {
+  background-color: #da190b;
+  }
+  
+  .popup-inner button[type="submit"]:disabled {
+  background-color: #bfbfbf;
+  color: #ffffff;
+  cursor: not-allowed;
+  }
+  
+  .popup-inner button[type="button"]:disabled {
+  background-color: #bfbfbf;
+  color: #ffffff;
+  cursor: not-allowed;
+  }
+
+  .signIn-footer{
+    margin-bottom: 20px;
+    margin-top: 10px;
+  }
+
+
+  .signin-text{
+    margin-top: 20px;
+    
+    
+  }
+
+  .form_header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .floating{
+ 
+    font-family: sans-serif;
+    
+
+
+ 
+
+ 
+    width: 20%;
+    height: 20%;
+ 
+    
+    
+  margin-top: 300px;
+  position:absolute;border-radius:inherit;top:0;right:0;bottom:0;left:0
+  }
+
+  .f{
+  
+    width: 100px;
+    height: 100px;
+    text-align: center;
+    
+  }

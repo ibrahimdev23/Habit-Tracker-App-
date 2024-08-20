@@ -10,9 +10,9 @@ export const Dashboard = () => {
 
     const setTodayDate = () => {
         setCurrentDate(new Date())
-        
-        
     }
+
+    
   return (
    
     <div className="mt-12 flex justify-evenly content-center flex-row items-start">
