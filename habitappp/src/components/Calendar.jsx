@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { nextDay,lightFormat, subMonths, sub, add, differenceInCalendarDays, differenceInDays, compareAsc, endOfMinute, endOfMonth, formatDistance, startOfMonth, subDays, format, setDate, lastDayOfMonth, getMonth, getDay, getDate, getYear } from "date-fns";
 import { Cell } from './Cell';
 
@@ -49,8 +49,9 @@ const nextYear = () => {
    
 // }
 
+//let tempStreaks = localStorage.getItem("streaks") ? JSON.parse(localStorage.getItem("streaks")) : []
+
 const addToStreks = (index) => {
-    let tempStreaks = []
     const newDate = setDate(value, index)
     const result = compareAsc(newDate, value)
     
@@ -62,6 +63,7 @@ const addToStreks = (index) => {
     let savedDate = lightFormat(new Date(year, month, day), 'yyyy-MM-dd')
     if(result != 1 && result != -1){
        // console.log("True")
+       let tempStreaks = []
         if(!tempStreaks.includes(savedDate)){
            // console.log("added")
            // let y = getYear(savedDate)
@@ -91,6 +93,25 @@ const addToStreks = (index) => {
   // console.log(streaks)
 }
 
+useEffect(() => {
+    setStreaks(JSON.parse(window.localStorage.temp))
+}, window.localStorage.temp)
+
+ useEffect(() => {
+     //window.localStorage.temp = JSON.stringify(streaks)
+    // let temp = window.localStorage.temp = JSON.stringify(streaks)
+    let temp = localStorage.getItem("temp") ? JSON.parse(localStorage.getItem("temp")) : []
+
+
+ },[streaks])
+
+ useEffect(() => {
+    const storedInfo = JSON.parse(window.localStorage.temp);
+    //JSON.parse(window.localStorage.streaks);
+    console.log(storedInfo)
+    console.log(window.localStorage.temp)
+}, [streaks])
+
   return (
     <>
     <div className=" flex gap-8 mb-5 ml-50 w-100 justify-center" >
@@ -98,10 +119,7 @@ const addToStreks = (index) => {
     onClick={setTodayDate}
     >Today
     </button>
-    <button className="flex gap-4 textlg bg-red-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" 
-    
-    >Add Streak
-    </button>
+ 
     </div>
     
 
@@ -156,12 +174,12 @@ const addToStreks = (index) => {
         
         
         for(let i = 0; i < streaks.length;i++){
-            console.log(streaks)
+            //console.log(streaks)
           // console.log(getMonth(streaks[0]))
            //console.log(value.getMonth())
           if(getMonth(streaks[i]) === getMonth(value) && getYear(streaks[i]) === getYear(value)){
               pos.push(getDate(streaks[i]))
-              console.log("pushed")
+             // console.log("pushed")
           }
         }
       
