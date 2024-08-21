@@ -1,4 +1,4 @@
-import {React, useState} from 'react'
+import {React, useState, useEffect} from 'react'
 import { format, set } from "date-fns";
 import { ToDoListItem } from './ToDoListItem'
 
@@ -29,13 +29,20 @@ let nextId = 0
 			completed: false
 		}
 		setTasks([...tasks, newTask ])
+		localStorage.setItem('toDoItem', JSON.stringify([...tasks, newTask]));
+
 		setText("")
 	}	
 	
 	}
 
-	const deleteTask = (id) => {
+	const deleteTask = (id, text) => {
+		console.log(text["text"])
 		setTasks(tasks.filter(task => task.id !== id))
+		//localStorage.setItem('toDoItem', JSON.stringify(tasks));
+		let itemsArr = JSON.parse(localStorage.getItem("toDoItem"))
+		 itemsArr.splice(itemsArr.indexOf(text["text"]))
+		 localStorage.setItem("toDoItem", JSON.stringify(itemsArr))
 	}
 
 	
@@ -54,6 +61,13 @@ let nextId = 0
 		}))
 	}
 
+	useEffect(()=> {
+		const storedToDos = localStorage.getItem('toDoItem');
+		if (storedToDos) {
+		  setTasks(JSON.parse(storedToDos))
+		}
+	  }, [])
+	  
 
   return (
    <div class=" c flex-grow items-center justify-center text-gray-600  ">

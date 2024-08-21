@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useReducer, useState } from 'react'
 import { nextDay,lightFormat, subMonths, sub, add, differenceInCalendarDays, differenceInDays, compareAsc, endOfMinute, endOfMonth, formatDistance, startOfMonth, subDays, format, setDate, lastDayOfMonth, getMonth, getDay, getDate, getYear } from "date-fns";
 import { Cell } from './Cell';
 
@@ -43,74 +43,56 @@ const nextYear = () => {
 }
 
 
-// const handleNewDate = (index) => {
-//     const newDate = setDate(value, index)
-//     onClick(newDate)
-   
-// }
 
-//let tempStreaks = localStorage.getItem("streaks") ? JSON.parse(localStorage.getItem("streaks")) : []
 
 const addToStreks = (index) => {
+  //let tempStreaks = []
     const newDate = setDate(value, index)
     const result = compareAsc(newDate, value)
-    
+   
     let month = getMonth(newDate)
     let day = getDate(newDate)
     let year = getYear(newDate)
-   // console.log(year)
+ 
     
     let savedDate = lightFormat(new Date(year, month, day), 'yyyy-MM-dd')
-    if(result != 1 && result != -1){
-       // console.log("True")
-       let tempStreaks = []
-        if(!tempStreaks.includes(savedDate)){
-           // console.log("added")
-           // let y = getYear(savedDate)
-           // console.log(y)
-           //streaks.push(savedDate)
-           //setStreaks((savedDate))
-           //setStreaks(savedDate => [...savedDate, streaks ])
-          // streaks.push(savedDate) 
-          tempStreaks.push(savedDate)
-           //setStreaks(...savedDate)
+    if(result == -1 || result == 0){
+      
+       
+        if(!streaks.includes(savedDate)){
+       
+          setStreaks(streaks => [...streaks, savedDate])
+          localStorage.setItem('streak', JSON.stringify([...streaks, savedDate]));
+
+      
            
          } 
-         setStreaks(tempStreaks)
-        //  else {
-        //    // setStreaks(streaks => streaks.concat(savedDate))
-        
-        //  }
-         //else {
-    
-        //     streaks.push(savedDate)
-        // }
-       // streaks.push(newDate)
+
+      
     } 
-   // console.log("hey")
-    //console.log(newDate)
    
-  // console.log(streaks)
+  
+  
 }
 
-useEffect(() => {
-    setStreaks(JSON.parse(window.localStorage.temp))
-}, window.localStorage.temp)
 
- useEffect(() => {
-     //window.localStorage.temp = JSON.stringify(streaks)
-    // let temp = window.localStorage.temp = JSON.stringify(streaks)
-    let temp = localStorage.getItem("temp") ? JSON.parse(localStorage.getItem("temp")) : []
+useEffect(()=> {
+  const storedStreaks = localStorage.getItem('streak');
+  if (storedStreaks) {
+    setStreaks(JSON.parse(storedStreaks))
+  }
+}, [])
 
 
- },[streaks])
 
- useEffect(() => {
-    const storedInfo = JSON.parse(window.localStorage.temp);
-    //JSON.parse(window.localStorage.streaks);
-    console.log(storedInfo)
-    console.log(window.localStorage.temp)
-}, [streaks])
+
+
+
+
+
+
+
+
 
   return (
     <>
@@ -172,7 +154,7 @@ useEffect(() => {
      
         let pos  = []
         
-        
+        //console.log(streaks)
         for(let i = 0; i < streaks.length;i++){
             //console.log(streaks)
           // console.log(getMonth(streaks[0]))
