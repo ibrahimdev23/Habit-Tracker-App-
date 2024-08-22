@@ -7,7 +7,6 @@ export const Calendar = ({value, onChange, onClick, setTodayDate, setStreakCount
 
 
 const [streaks, setStreaks] = useState([])
-//const streaks = []
 
 
 const daysWeek = ["Sun","Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
@@ -28,7 +27,6 @@ const prefixStart = numberOfDaysLastMonth - prefix
 
 const perviousMonth = () => {
     onChange(sub(value, {months: 1}))
-    // getStreaks()
 }
 const perviousYear = () => {
     onChange(sub(value, {years: 1}))
@@ -36,7 +34,6 @@ const perviousYear = () => {
 }
 const nextMonth = () => {
     onChange(add(value, {months: 1}))
-   // getStreaks()
 }
 const nextYear = () => {
     onChange(add(value, {years: 1}))
@@ -46,7 +43,6 @@ const nextYear = () => {
 
 
 const addToStreks = (index) => {
-  //let tempStreaks = []
     const newDate = setDate(value, index)
     const result = compareAsc(newDate, value)
    
@@ -140,7 +136,6 @@ useEffect(()=> {
             props={date}
             isNotCurrent={true}
             isDate={true}
-            //onClick={() => addToStreks(date)}
           >
         
           </Cell>
@@ -154,14 +149,11 @@ useEffect(()=> {
      
         let pos  = []
         
-        //console.log(streaks)
         for(let i = 0; i < streaks.length;i++){
-            //console.log(streaks)
-          // console.log(getMonth(streaks[0]))
-           //console.log(value.getMonth())
+         
           if(getMonth(streaks[i]) === getMonth(value) && getYear(streaks[i]) === getYear(value)){
               pos.push(getDate(streaks[i]))
-             // console.log("pushed")
+      
           }
         }
       
@@ -171,7 +163,6 @@ useEffect(()=> {
             key={date}
             props={date}
             onClick={() => addToStreks(date)}
-           // isToday={isToday}
             isDate={true}
             pos={pos}
             mark={mark}
@@ -189,8 +180,7 @@ useEffect(()=> {
        
         
             return <Cell key={index} 
-            //onClick={() => addToStreks(date)}
-            isNotCurrent={true}
+           // isNotCurrent={true}
             isDate={true}
             props={date}/>
         })}

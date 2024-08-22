@@ -8,7 +8,6 @@ export const Nav = () => {
   <img src="https://em-content.zobj.net/source/facebook/355/cross-mark-button_274e.png" width="50px" height={"50px"}></img>
   <h2 className="text-black no-underline hover:no-underline font-bold text-2xl">HabitApp</h2>
 		<div class="ml-10">
-			{/* <a class="mx-2 text-sm font-semibold text-indigo-700" href="#"> {user ? <Link to="/dashboard" >Dashboard</Link>: <Link to="/" >Home</Link>}</a> */}
 		</div >
 
 	
@@ -20,10 +19,11 @@ export const Nav = () => {
     
       <a className="mx-2 text-sm font-semibold text-indigo-700"></a>  
 		</buton>
-      		About
+    <a href='https://jamesclear.com/stop-procrastinating-seinfeld-strategy' className="mx-2 text-sm font-semibold text-indigo-700">
+    Consistency is key
+    </a>  
     <buton class="flex items-center justify-center ">
-			{/* {user ? null :
-      <a className="mx-2 text-sm font-semibold text-indigo-700"><Link to="/login" >Sign In</Link> </a>  } */}
+		
 		</buton>
 
 	</div>

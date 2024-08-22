@@ -15,6 +15,7 @@ export const Dashboard = () => {
 
   return (
    <div>
+   <Nav></Nav>
    <div>
         <Banner></Banner>
        </div>
@@ -29,7 +30,6 @@ export const Dashboard = () => {
 
     
         <Calendar 
-        // className="w-full lg:max-w-xl p-6 space-y-8 sm:p-8 bg-white rounded-lg shadow-xl dark:bg-gray-800"
         value={currentDate} onChange={setCurrentDate} setTodayDate={setTodayDate}/>
 </div>
         <div className="two">

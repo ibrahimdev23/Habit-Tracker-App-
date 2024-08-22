@@ -1,31 +1,13 @@
 import React, { useEffect, useState } from 'react'
 
 export const Banner = () => {
- // const [showBanner, setShowBanner] = useState(true)
 
-  // const hideBanner = () => {
-  //   setShowBanner(false)
-    
-  // }
 
   const [showBanner, setShowBanner] = useState( () => {
     const localData = localStorage.getItem('pageBanner');
     return localData ? JSON.parse(localData) : true;
 });
-  // useEffect(() => {
-  //   let bannerBoolean = localStorage.getItem("pageBanner")
-   
-  //   setShowBanner(JSON.parse(bannerBoolean))
-  //   }, [])
 
-    // useEffect(() => {
-    //   // const banner = JSON.parse(localStorage.getItem('pageBanner'));
-    //   // if (banner) {
-    //   //   setShowBanner(banner);
-    //   // }
-
-    //   setShowBanner(JSON.parse(localStorage.getItem("pageBanner")))
-    // }, []);
 
   useEffect(() => {
     localStorage.setItem("pageBanner", JSON.stringify(showBanner))
