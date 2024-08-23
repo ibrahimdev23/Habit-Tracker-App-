@@ -52,7 +52,8 @@ const addToStreks = (index) => {
  
     
     let savedDate = lightFormat(new Date(year, month, day), 'yyyy-MM-dd')
-    if(result == -1 || result == 0){
+    // if(result == -1 || result == 0){
+      if(result == 0){
       
        
         if(!streaks.includes(savedDate)){
