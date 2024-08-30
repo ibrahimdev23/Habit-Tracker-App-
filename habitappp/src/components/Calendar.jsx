@@ -7,7 +7,7 @@ export const Calendar = ({value, onChange, onClick, setTodayDate, setStreakCount
 
 
 const [streaks, setStreaks] = useState([])
-
+const [streakCount, updateStreakCount] = useState([])
 
 const daysWeek = ["Sun","Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
@@ -39,10 +39,52 @@ const nextYear = () => {
     onChange(add(value, {years: 1}))
 }
 
+const isYesterday = (currentDate, previousDate) => {
+  // Normalize the dates to midnight to ignore time parts
+  const normalizeDate = (date) => {
+    const normalized = new Date(date);
+    normalized.setHours(0, 0, 0, 0); // Set time to midnight
+    return normalized;
+  };
 
+  // Normalize both dates
+  const normCurrent = normalizeDate(currentDate);
+  const normPrevious = normalizeDate(previousDate);
 
+  const oneDay = 24 * 60 * 60 * 1000; // milliseconds in one day
 
-const addToStreks = (index) => {
+  // Check if the difference between the two dates is exactly one day
+  return (normPrevious-normCurrent ) === oneDay;
+};
+const calculateStreakCount = (updatedStreaks) => {
+  if (updatedStreaks.length === 0) return 0;
+
+  let count = 0;
+  // Convert date strings to Date objects and sort in descending order
+  const sortedDates = updatedStreaks
+    .map(date => new Date(date)) // Convert strings to Date objects
+    .sort((a, b) => b - a);
+ 
+  for (let i = 0; i < sortedDates.length; i++) {
+    const currentDate = sortedDates[i];
+    console.log(currentDate)
+    const previousDate = i > 0 ? sortedDates[i - 1] : null;
+   
+    // Increment streak if first date or consecutive day
+    console.log(isYesterday(currentDate, previousDate))
+    if (i === 0 || isYesterday(currentDate, previousDate)) {
+      count++;
+      
+    } else {
+      break
+    }
+  }
+  
+  return count;
+};
+
+ 
+const addToStreaks = (index) => {
     const newDate = setDate(value, index)
     const result = compareAsc(newDate, value)
    
@@ -52,18 +94,15 @@ const addToStreks = (index) => {
  
     
     let savedDate = lightFormat(new Date(year, month, day), 'yyyy-MM-dd')
-    // if(result == -1 || result == 0){
       if(result == 0){
         if(!streaks.includes(savedDate)){
-       
           setStreaks(streaks => [...streaks, savedDate])
-          localStorage.setItem('streak', JSON.stringify([...streaks, savedDate]));
+          localStorage.setItem('streak', JSON.stringify([...streaks, savedDate])); 
+          const newStreakCount = calculateStreakCount(updatedStreaks);
+          // Highlight: Update streak count in Dashboard
+          updateStreakCount(newStreakCount); 
+        } 
 
-      
-           
-         } 
-
-      
     } 
    
   
@@ -71,10 +110,16 @@ const addToStreks = (index) => {
 }
 
 
+
+
 useEffect(()=> {
   const storedStreaks = localStorage.getItem('streak');
   if (storedStreaks) {
-    setStreaks(JSON.parse(storedStreaks))
+    const parsedStreaks = JSON.parse(storedStreaks);
+    setStreaks(parsedStreaks)
+    const initialStreakCount = calculateStreakCount(parsedStreaks);
+      // Highlight: Update streak count in Dashboard
+      updateStreakCount(initialStreakCount);
   }
 }, [])
 
@@ -91,14 +136,30 @@ useEffect(()=> {
 
   return (
     <>
+    {/* <div className="mt-0 pt-0 mb-4 text-center">
+        <span className=" bg-gradient-to-r from-stone-500 via-red-500 to-gray-500 bg-clip-text text-transparent text-5xl font-black" >
+        Current Streak: {streakCount} {streakCount > 1 ? " days" : " day"}
+        </span>
+      </div> */}
+
+      {streakCount > 0 && (
+                <div className="mt-0 pt-0 mb-4 text-center">
+                    <span className=" bg-gradient-to-r from-stone-500 via-red-500 to-gray-500 bg-clip-text text-transparent text-5xl font-black">
+                        Current Streak: {streakCount} day{streakCount !== 1 ? 's' : ''}
+                    </span>
+                </div>
+            )}
     <div className=" flex gap-8 mb-5 ml-50 w-100 justify-center" >
+    
     <button className="flex  gap-4 textlg bg-red-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" 
     onClick={setTodayDate}
     >Today
     </button>
  
     </div>
-    
+    {/* <div className="mb-4 text-center">
+        <span className="text-xl font-bold">Current Streak: {streakCount} days</span>
+      </div> */}
 
     <div className="w-[650px] border-t border-l bg-white rounded-lg shadow ">
     
@@ -161,7 +222,7 @@ useEffect(()=> {
           <Cell
             key={date}
             props={date}
-            onClick={() => addToStreks(date)}
+            onClick={() => addToStreaks(date)}
             isDate={true}
             pos={pos}
             mark={mark}

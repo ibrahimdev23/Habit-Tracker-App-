@@ -75,11 +75,13 @@ let nextId = 0
 		<div class="c max-w-full p-8 bg-white w-96">
 			<div class="flex items-center mb-6">
 				
-				<h4 class="font-semibold ml-3 text-lg">{format(date, " LLLL dd yyyy")}</h4>
+				<h4 class="font-semibold ml-3 text-lg">
+					To Do List:
+				</h4>
 			</div>
 		</div>
 	
-		<ul className="" >
+		<ul  >
 		
 			{filteredTasks.map(task => (
 				<li>
@@ -100,7 +102,7 @@ let nextId = 0
 		
 		<div>
 		<input 
-		className="border ml-5 mt-12 mr-5"
+		className="border ml-5 mt-20 mr-5"
 		placeholder="Add new task"
 			value={text ? text : "add new task"}
 			onChange={e => setText(e.target.value)}>
