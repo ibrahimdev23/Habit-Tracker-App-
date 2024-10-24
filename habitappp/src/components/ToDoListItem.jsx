@@ -7,6 +7,7 @@ export const ToDoListItem = ({task, deleteTask, toggleCheckedMark}) => {
 		toggleCheckedMark(task.id)
 	}
 	
+  
 
   return (
     <div className="flex items-center group/item ">
